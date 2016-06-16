@@ -1,0 +1,20 @@
+extends ./layout.jade
+
+block content
+	include ./_flash.jade
+
+	h1 Notes!?
+
+	if notes && notes.length > 0
+		.row(style={'font-weight': 'bold', 'text-align': 'left'})
+			.col-xs-4 created
+			.col-xs-3 title
+		each note,index in notes
+			.row
+				.col-xs-4= note.created
+				.col-xs-3
+					a(href="note/" + note._id)= note.title
+	else
+		p 
+			| no notes, 
+			a(href="/note") create a new one

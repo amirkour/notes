@@ -1,0 +1,32 @@
+extends ./layout.jade
+
+block content
+	if note
+		h1 
+			| editing note 
+			= note.title
+	else
+		h1 new note
+
+	if note
+		form(method='post',action="/note/" + note._id)
+			//- input(type='hidden',name='method',value='update')
+			.form-group
+				label(for="title") title
+				input.form-control(type='text',name='title',id='title',value="#{note.title}")
+			.form-group
+				label(for='body') note body	
+				textarea.form-control(rows="3",name="body",id="body")
+					| #{note.body}
+			button.btn.btn-primary(type='submit') save
+
+	else
+		form(method='post',action='/note')
+			//- input(type='hidden',name='method',value='create')
+			.form-group
+				label(for="title") title
+				input.form-control(type='text',name='title',id='title')
+			.form-group
+				label(for='body') note body	
+				textarea.form-control(rows="3",name="body",id="body")
+			button.btn.btn-primary(type='submit') save

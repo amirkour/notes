@@ -1,0 +1,27 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "'searchable, taggable notes. node. mongo.  yum.'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "es6-promise": "^3.2.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.9.2",
+    "mongodb": "^2.1.18",
+    "req-flash": "0.0.3",
+    "stylus": "^0.50.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-data": "^1.2.1",
+    "gulp-stylus": "^2.4.0"
+  }
+}

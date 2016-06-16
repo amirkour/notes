@@ -1,0 +1,9 @@
+
+if flash && typeof flash.success === 'string'
+	.alert.alert-success= flash.success
+else if flash && typeof flash.info === 'string'
+	.alert.alert-info= flash.info
+else if flash && typeof flash.warning === 'string'
+	.alert.alert-warning= flash.warning
+else if flash && typeof flash.danger === 'string'
+	.alert.alert-danger= flash.danger

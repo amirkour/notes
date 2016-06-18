@@ -3,10 +3,7 @@ var ReactDOM = require('react-dom');
 var Promise = require('es6-promise').Promise;
 
 
-var data = [
-	{id: 1, author: "Pete Hunt", text: "This is one commentsadsf"},
-	{id: 2, author: "Jordan Walke", text: "This is *another* commentadf"}
-];
+
 
 var Comment = React.createClass({
 	render: function() {
@@ -53,12 +50,30 @@ var CommentBox = React.createClass({
 		return {data:[]};
 	},
 	componentDidMount: function(){
-		// TODO - get promises in the browser
-		// new Promise(function(fulfill,reject){
-		// 	fulfill("whatup");
-		// }).then(function(str){
-		// 	alert(str);
-		// });
+		var self = this;
+		new Promise(function(fulfill,reject){
+			$.ajax({
+				url: '/test_dataz',
+				dataType:'json',
+				method:'GET',
+				success:function(data,status,jqxhr){ fulfill(data,status,jqxhr); }.bind(this),
+				error:function(jqxhr,strStatus,strError){ reject(jqxhr,strStatus,strError); }.bind(this)
+			});
+		}).then(function(result){
+			self.setState({data: result});
+		}).catch(function(jqxhr,status,error){
+			strError = "unknown error";
+			if(jqxhr instanceof Error)
+				strError = jqxhr.message || "no error given";
+			else if(typeof jqxhr.responseText === 'string')
+				strError = jqxhr.responseText;
+			else if(typeof status === 'string')
+				strError = status;
+			else if(typeof error === 'string')
+				strError = error;
+
+			alert('error: ' + strError);
+		});
 	},
 	render: function() {
 		return (
@@ -72,6 +87,6 @@ var CommentBox = React.createClass({
 });
 
 ReactDOM.render(
-	<CommentBox data={data} />,
+	<CommentBox />,
 	document.getElementById('stuff')
 );

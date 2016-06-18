@@ -179,5 +179,13 @@ app.get("/note/:id", function(req,res){
         flashRedirect(req,res,"/","got this error: " + err, "danger");
     });
 });
+app.get("/test_dataz",function(req,res){
+    var data = [
+        {id: 1, author: "Pete Hunt", text: "This is one commentsadsf"},
+        {id: 2, author: "Jordan Walke", text: "This is *another* commentadf"}
+    ];
+
+    res.json(data);
+});
 
 

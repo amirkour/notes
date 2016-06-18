@@ -36,4 +36,7 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# js output
+public/js/compiled/
+
 .DS_Store

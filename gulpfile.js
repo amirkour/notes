@@ -23,7 +23,7 @@ gulp.task("browserify", function () {
 			// ,debug : !gulp.env.production
 		}))
 		.pipe(rename("bundle.js"))
-		.pipe(gulp.dest('public/js/'));
+		.pipe(gulp.dest('public/js/compiled/'));
 		// .pipe(concat("notes-app-compiled.js"))
 		// .pipe(sourcemaps.write("."))
 		// .pipe(gulp.dest("./src/js/"));

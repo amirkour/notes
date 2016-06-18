@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
     "es6-promise": "^3.2.1",
@@ -16,12 +18,19 @@
     "express-session": "^1.13.0",
     "jade": "^1.9.2",
     "mongodb": "^2.1.18",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "req-flash": "0.0.3",
     "stylus": "^0.50.0"
   },
   "devDependencies": {
+    "browserify": "^13.0.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
     "gulp-data": "^1.2.1",
+    "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.4.0"
   }
 }

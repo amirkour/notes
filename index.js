@@ -53,6 +53,8 @@ app.use(flash());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(absolutePathToPublicAssets));
 app.use(stylus.middleware(absolutePathToPublicAssets));
+app.set('views', absolutePathToViewFolder);
+app.set('view engine', 'jade');
 
 var Note = function(params){
     params = params || {};
@@ -78,11 +80,7 @@ function flashRedirect(req,res,url,msg,level){
     res.redirect(url);
 }
 
-// enable jade templates
-app.set('views', absolutePathToViewFolder);
-app.set('view engine', 'jade');
-
-app.get('/', function(req,res){
+app.get('/blablabla', function(req,res){
     console.log("get /");
 
     var flash = req.flash();
@@ -187,5 +185,12 @@ app.get("/test_dataz",function(req,res){
 
     res.json(data);
 });
+app.get('*', function(req,res){
+    console.log("get-catch-all");
 
+    var flash = req.flash();
+    console.log("Flash is: " + JSON.stringify(flash));
+
+    res.render('index');
+});
 

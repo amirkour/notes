@@ -1,12 +1,8 @@
 var gulp = require('gulp'),
-	data = require('gulp-data'),
 	stylus = require('gulp-stylus'),
-	browserify = require("gulp-browserify"),
-	// babelify = require("babelify"),
-	babel = require("gulp-babel"),
-	concat = require("gulp-concat"),
 	fs = require('fs'),
-	rename = require('gulp-rename');
+	source = require('vinyl-source-stream'),
+	browserify = require('browserify');
 
 gulp.task('css', function () {
   return gulp.src('./src/styl/**/*.styl')
@@ -14,32 +10,44 @@ gulp.task('css', function () {
     .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task("browserify", function () {
-	return gulp.src("src/js/notes-app.js")
-		// .pipe(sourcemaps.init())
-		.pipe(babel())
-		.pipe(browserify({
-			insertGlobals : true
-			// ,debug : !gulp.env.production
-		}))
-		.pipe(rename("bundle.js"))
-		.pipe(gulp.dest('public/js/compiled/'));
-		// .pipe(concat("notes-app-compiled.js"))
-		// .pipe(sourcemaps.write("."))
-		// .pipe(gulp.dest("./src/js/"));
+gulp.task('js', function(){
+
+	browserify('./src/js/app.js')
+		.transform("babelify", {presets: ["es2015", "react"]})
+		.bundle()
+		.pipe(source('bundle.js'))
+		.pipe(gulp.dest('./public/js/compiled/'));
 });
 
-// TODO
-// debug environment and sourcemaps?
-// concat and lint and minify?
-// gulp.task('browserify', function(){
-// 	gulp.src('src/js/notes-app-compiled.js')
-// 		.pipe(browserify({
-// 			insertGlobals : true
-// 			// ,debug : !gulp.env.production
-// 		}))
-// 		.pipe(rename("bundle.js"))
-// 		.pipe(gulp.dest('public/js/'))
-// });
+var js_task_list = 'js',
+	jsx_task_list = 'js',
+	styl_task_list = 'css',
+	js_watcher = gulp.watch('src/js/**/*.js', [js_task_list]),
+	jsx_watcher = gulp.watch('src/js/**/*.jsx', [jsx_task_list]),
+	styl_watcher = gulp.watch('src/styl/**/*.styl', [styl_task_list]);
 
-gulp.task('default', ['css', 'browserify']);
+console.log("watching js files for changes ...");
+js_watcher.on('change', function(event) {
+  console.log('File ' + event.path + ' was ' + event.type + ', running [' + js_task_list + '] tasks ...');
+});
+
+console.log("watching jsx files for changes ...");
+jsx_watcher.on('change', function(event) {
+  console.log('File ' + event.path + ' was ' + event.type + ', running [' + js_task_list + '] tasks ...');
+});
+
+console.log("watching styl files for changes ...");
+styl_watcher.on('change', function(event) {
+  console.log('File ' + event.path + ' was ' + event.type + ', running [' + styl_task_list + '] tasks ...');
+});
+
+gulp.task('default', ['css']);
+
+/*
+TODO
+- dev vs pro
+	- minify
+	- sourcemaps
+- compiling jade templates?
+
+*/

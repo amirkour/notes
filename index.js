@@ -178,12 +178,24 @@ app.get("/note/:id", function(req,res){
     });
 });
 app.get("/test_dataz",function(req,res){
-    var data = [
-        {id: 1, author: "Pete Hunt", text: "This is one commentsadsf"},
-        {id: 2, author: "Jordan Walke", text: "This is *another* commentadf"}
-    ];
+    new Promise(function(fulfill,reject){
+        db.collection('notes').find().sort({created:-1}).toArray(function(err,results){
+            if(err)
+                reject(err);
+            else
+                fulfill(results);
+        });
+    }).then(function(notes){
+        // res.render('index', {notes: notes, flash: flash, date: new Date().toDateString()});
+        res.json(notes);
+    }).catch(function(err){
+        // flash.danger = err;
 
-    res.json(data);
+        // res.render('index', {notes: null, flash: flash, date: new Date().toDateString()});
+        res.render({error: 'foober'});
+    });
+
+    
 });
 app.get('*', function(req,res){
     console.log("get-catch-all");

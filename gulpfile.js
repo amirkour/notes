@@ -10,11 +10,16 @@ gulp.task('css', function () {
     .pipe(gulp.dest('./public/css/'));
 });
 
+function printBrowserifyError(err){
+	console.log('js task error "' + err + '"');
+}
+
 gulp.task('js', function(){
 
 	browserify('./src/js/app.js')
 		.transform("babelify", {presets: ["es2015", "react"]})
 		.bundle()
+		.on('error', printBrowserifyError)
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./public/js/compiled/'));
 });
@@ -41,7 +46,7 @@ styl_watcher.on('change', function(event) {
   console.log('File ' + event.path + ' was ' + event.type + ', running [' + styl_task_list + '] tasks ...');
 });
 
-gulp.task('default', ['css']);
+gulp.task('default', ['css', 'js']);
 
 /*
 TODO

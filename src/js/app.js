@@ -1,26 +1,9 @@
 
 var Home = require('./jsx/home.jsx'),
-	AboutComp = require('./jsx/about.jsx'),
 	React = require('react'),
-	ReactDOM = require('react-dom'),
-	reactRouter = require('react-router'),
-	Router = reactRouter.Router,
-	Route = reactRouter.Route,
-	Link = reactRouter.Link,
-	browserHistory = reactRouter.browserHistory;
+	ReactDOM = require('react-dom');
 
-ReactDOM.render((
-	<div>
-		<div>
-			<Link to="/">Home</Link>
-		</div>
-		<Router history={browserHistory}>
-			<Route path="/" component={Home} />
-			<Route path="/about" component={AboutComp} />
-		</Router>
-	</div>
-	), document.getElementById('stuff')
-);
+ReactDOM.render(<Home />, document.getElementById('stuff'));
 
 /*
 TODO

@@ -4,11 +4,17 @@ var React = require('react'),
 module.exports = React.createClass({
 	render: function(){
 
-		var noteNodes = this.props.notes.map(function(note){
-			return (
-				<NoteTableRow {...note} key={note._id} />
-			);
-		});
+		var noteNodes = null;
+		if(this.props.notes && this.props.notes.length > 0){
+			noteNodes = this.props.notes.map(function(note){
+				return (
+					<NoteTableRow {...note} key={note._id} />
+				);
+			});
+		}else{
+			noteNodes = <div className="row">No notes</div>;
+		}
+
 		return (
 			<div className="container" >
 				<div className="row" style={{borderBottom: '2px solid black', fontWeight: 'bold'}}>

@@ -28,6 +28,9 @@ module.exports = React.createClass({
 				<h1>Notes!?</h1>
 				<p>I'm the homepage!?</p>
 				<NoteTable notes={this.state.notes} />
+				<p style={{marginTop: '10px'}}>
+					<a id="new-note-link" className="btn btn-success" onClick={this.props.routes.newNote}>New Note</a>
+				</p>
 			</div>
 		);
 	}

@@ -1,3 +1,9 @@
 body {
   background-color: #fff;
 }
+#new-note-link {
+  cursor: pointer;
+}
+.navbar-brand {
+  cursor: pointer;
+}

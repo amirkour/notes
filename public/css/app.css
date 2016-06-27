@@ -7,3 +7,6 @@ body {
 .navbar-brand {
   cursor: pointer;
 }
+.note-title {
+  cursor: pointer;
+}

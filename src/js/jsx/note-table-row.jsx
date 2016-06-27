@@ -5,7 +5,7 @@ module.exports = React.createClass({
 		return (
 			<div className="row" style={{borderBottom: '1px solid #ccc'}}>
 				<div className="col-xs-6">{this.props.created}</div>
-				<div className="col-xs-3">{this.props.title}</div>
+				<div className="col-xs-3"><a className="note-title" onClick={this.props.routes.editNote}>{this.props.title}</a></div>
 			</div>
 		);
 	}

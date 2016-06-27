@@ -1,12 +1,16 @@
 
 var Home = require('./jsx/home.jsx'),
 	NewNote = require('./jsx/note-create.jsx'),
+	EditNote = require('./jsx/note-edit.jsx'),
 	Layout = require('./jsx/layout.jsx'),
 	React = require('react'),
 	ReactDOM = require('react-dom'),
 
 	nav = {
 		routes: {
+			editNote: function(){
+				ReactDOM.render( <Layout {...nav}>{editNoteView}</Layout>, stuffNode );
+			},
 			newNote: function(){
 				ReactDOM.render( <Layout {...nav}>{newNoteView}</Layout>, stuffNode );
 			},
@@ -17,6 +21,7 @@ var Home = require('./jsx/home.jsx'),
 	},
 
 	newNoteView = <NewNote {...nav} />,
+	editNoteView = <EditNote {...nav} />,
 	homeView = <Home {...nav} />,
 	stuffNode = document.getElementById('stuff');
 

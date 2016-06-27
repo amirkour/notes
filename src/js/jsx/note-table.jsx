@@ -4,11 +4,12 @@ var React = require('react'),
 module.exports = React.createClass({
 	render: function(){
 
-		var noteNodes = null;
+		var noteNodes = null,
+			self = this;
 		if(this.props.notes && this.props.notes.length > 0){
 			noteNodes = this.props.notes.map(function(note){
 				return (
-					<NoteTableRow {...note} key={note._id} />
+					<NoteTableRow {...note} {...self.props} key={note._id} />
 				);
 			});
 		}else{
